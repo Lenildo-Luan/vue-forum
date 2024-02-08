@@ -6,6 +6,7 @@ import NotFound from "@/pages/NotFound";
 import Forum from "@/pages/Forum";
 import Category from "@/pages/Category";
 import Profile from "@/pages/Profile";
+import ThreadCreate from "@/pages/ThreadCreate";
 
 import sourceData from "@/data.json";
 
@@ -67,6 +68,12 @@ const routes = [
     name: "ProfileEdit",
     component: Profile,
     meta: { toTop: true, smoothScroll: true },
+  },
+  {
+    path: "/form/:forumId/thread/create",
+    name: "ThreadCreate",
+    component: ThreadCreate,
+    props: true,
   },
 ];
 
