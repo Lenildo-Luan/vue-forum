@@ -2,7 +2,7 @@
   <div class="col-large push-top">
     <h1>
       {{ thread.title }}
-      
+
       <router-link :to="{ name: 'ThreadEdit', id: this.id }" class="btn-green btn-small" tag="button">
         Edit Thread
       </router-link>
@@ -15,9 +15,10 @@
 </template>
   
 <script>
-
 import PostList from '@/components/PostList'
 import PostEditor from '@/components/PostEditor'
+import { findById } from '@/helpers'
+
 export default {
   name: 'ThreadShow',
   components: {
@@ -32,7 +33,7 @@ export default {
   },
   computed: {
     threads() {
-      return this.$store.state.threads
+      return findById(this.threads, this.id)
     },
     posts() {
       return this.$store.state.posts

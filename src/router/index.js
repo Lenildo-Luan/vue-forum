@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { findById } from "@/helpers";
 
 import Home from "@/pages/Home";
 import ThreadShow from "@/pages/ThreadShow";
@@ -7,7 +8,7 @@ import Forum from "@/pages/Forum";
 import Category from "@/pages/Category";
 import Profile from "@/pages/Profile";
 import ThreadCreate from "@/pages/ThreadCreate";
-import ThreadEdit from '@/pages/ThreadEdit'
+import ThreadEdit from "@/pages/ThreadEdit";
 
 import sourceData from "@/data.json";
 
@@ -24,9 +25,7 @@ const routes = [
     props: true,
     beforeEnter(to, from, next) {
       // check if thread exists
-      const threadExists = sourceData.threads.find(
-        (thread) => thread.id === to.params.id
-      );
+      const threadExists = findById(sourceData.threads, to.params.id);
       // if exists continue
       if (threadExists) {
         return next();
@@ -71,16 +70,16 @@ const routes = [
     meta: { toTop: true, smoothScroll: true },
   },
   {
-    path: '/forum/:forumId/thread/create',
+    path: "/forum/:forumId/thread/create",
     name: "ThreadCreate",
     component: ThreadCreate,
     props: true,
   },
   {
-    path: '/thread/:id/edit',
-    name: 'ThreadEdit',
+    path: "/thread/:id/edit",
+    name: "ThreadEdit",
     component: ThreadEdit,
-    props: true
+    props: true,
   },
 ];
 

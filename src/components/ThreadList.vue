@@ -1,8 +1,6 @@
 <template>
   <div class="col-full">
-
     <div class="thread-list">
-
       <h2 class="list-title">Threads</h2>
 
       <div v-for="thread in threads" :key="thread.id" class="thread">
@@ -10,6 +8,7 @@
           <p>
             <router-link :to="{ name: 'ThreadShow', params: { id: thread.id } }">{{ thread.title }}</router-link>
           </p>
+
           <p class="text-faded text-xsmall">
             By <a href="#">{{ userById(thread.userId).name }}</a>,
             <AppDate :timestamp="thread.publishedAt" />.
@@ -27,18 +26,20 @@
             <p class="text-xsmall">
               <a href="#">{{ userById(thread.userId).name }}</a>
             </p>
+
             <p class="text-xsmall text-faded">
               <AppDate :timestamp="thread.publishedAt" />
             </p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
   
 <script>
+import { findById } from '@/helpers'
+
 export default {
   props: {
     threads: {
@@ -47,11 +48,11 @@ export default {
     }
   },
   computed: {
-    posts() {
-      return this.$store.state.posts
+    posts(postId) {
+      return findById(this.posts, postId)
     },
-    users() {
-      return this.$store.state.users
+    users(userId) {
+      return findById(this.users, userId)
     }
   },
   methods: {
